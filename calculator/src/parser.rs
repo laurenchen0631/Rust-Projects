@@ -12,7 +12,6 @@ pub fn tokenize(expression: &str) -> Vec<Token> {
         let token = Token::from(cap.get(1).unwrap().as_str());
         tokens.push(token);
     }
-    println!("{:?}", tokens);
 
     tokens
 }
@@ -24,7 +23,6 @@ pub enum ParseError {
     UnmatchedParenthesis,
     // EmptyExpression,
 }
-
 
 pub fn parse(tokens: &[Token]) -> Result<Box<ASTNode>, ParseError> {
     let mut tokens = tokens.iter().peekable();
@@ -82,18 +80,13 @@ fn parse_factor(iter: &mut Peekable<Iter<Token>>) -> Result<Box<ASTNode>, ParseE
             Ok(Box::new(ASTNode::Number(*value)))
         },
         Some(Token::LeftParen) => {
-            iter.next();
             let expr = parse_expr(iter)?;
             match iter.next() {
                 Some(Token::RightParen) => Ok(expr),
-                _ => {
-                    println!("parse_factor)");
-                    Err(ParseError::UnmatchedParenthesis)
-                },
+                _ => Err(ParseError::UnmatchedParenthesis),
             }
         }
         _ => {
-            println!("(parse_factor");
             Err(ParseError::UnexpectedToken("".to_string()))
         },
     }

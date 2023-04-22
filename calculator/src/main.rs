@@ -8,9 +8,6 @@ fn main() {
     let expression = &args[1];
 
     let tokens = tokenize(expression);
-    let root = parse(&tokens);
-    match root {
-        Ok(root) => println!("{:?}", root.evaluate()),
-        Err(e) => println!("{:?}", e),
-    }
+    let root = parse(&tokens).unwrap();
+    println!("{:?}", root.evaluate());
 }
