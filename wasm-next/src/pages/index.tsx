@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   useEffect(() => {
-    import('@wasm/index').then(({ greet }) => greet());
+    import('@wasm/index').then(({ greet }) => greet("World"));
   }, []);
 
   return (
