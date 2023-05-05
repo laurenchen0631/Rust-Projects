@@ -1,8 +1,8 @@
 
 use wasm_bindgen::prelude::*;
 
-mod utils;
-mod life;
+pub mod utils;
+pub mod life;
 
 
 // When the `wee_alloc` feature is enabled, use `wee_alloc` as the global
